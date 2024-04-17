@@ -57,7 +57,7 @@ const Series: FC = () => {
       if (!id) return;
 
       const url = generateUrl({
-        baseUrl: "http://www.omdbapi.com/",
+        baseUrl: "https://www.omdbapi.com/",
         searchParams: {
           i: id.trim(),
           apikey: process.env.NEXT_PUBLIC_OMDB_API_KEY,

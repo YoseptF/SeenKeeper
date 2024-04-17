@@ -59,7 +59,7 @@ const Season: FC<SeasonProps> = ({
       if (!seriesId || !seasonId) return;
 
       const url = generateUrl({
-        baseUrl: "http://www.omdbapi.com/",
+        baseUrl: "https://www.omdbapi.com/",
         searchParams: {
           i: seriesId.trim(),
           Season: seasonId.trim(),

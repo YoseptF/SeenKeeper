@@ -46,7 +46,7 @@ const Search: FC = () => {
       });
 
       const url = generateUrl({
-        baseUrl: "http://www.omdbapi.com/",
+        baseUrl: "https://www.omdbapi.com/",
         searchParams: {
           s: search.trim(),
           apikey: process.env.NEXT_PUBLIC_OMDB_API_KEY,
