@@ -4,6 +4,7 @@ import { ChangeEventHandler, FC } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { PATHS_WITHOUT_SEARCH_BAR } from "@/utils/defaultValues";
 import classNames from "classnames";
 import { debounce } from "@/utils";
 
@@ -15,7 +16,6 @@ const SearchBar: FC = () => {
 
   const error = searchParams.get('error');
   const query = searchParams.get('query');
-  const id = searchParams.get('id');
 
   const debouncedSearch = debounce(async (query: string) => router.push(`/search?query=${query}`), 350);
 
@@ -23,7 +23,7 @@ const SearchBar: FC = () => {
 
   const handleSearchChange: ChangeEventHandler<HTMLInputElement> = (e) => debouncedSearch(e.target.value);
 
-  if (id || pathname === '/favorites') return null;
+  if (PATHS_WITHOUT_SEARCH_BAR.includes(pathname)) return null;
 
   return (
     <section className="w-full relative">

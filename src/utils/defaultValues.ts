@@ -210,3 +210,5 @@ export const loadingResults: ResultProps[] = Array.from({ length: 100 }, (_, i) 
 }));
 
 export const LOCAL_STORAGE_KEY = 'favoriteEpisodes';
+
+export const PATHS_WITHOUT_SEARCH_BAR = ['/favorites', '/series'];
