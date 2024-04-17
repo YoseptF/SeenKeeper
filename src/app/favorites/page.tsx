@@ -3,6 +3,7 @@
 import { FC, useEffect, useMemo, useState } from "react";
 import FavoriteSeries, { FavoriteSeriesInfo } from "@/components/FavoriteSeries";
 
+import { LOCAL_STORAGE_KEY } from "@/utils/defaultValues";
 import Placeholder from "@/components/Placeholder";
 
 type FavoriteEpisodesBySeries = {
@@ -13,13 +14,13 @@ const Favorites: FC = () => {
   const [seriesById, setSeriesById] = useState<[string, FavoriteSeriesInfo][]>([]);
 
   useEffect(() => {
-    const favoriteEpisodes = localStorage.getItem('favoriteEpisodes');
+    const favoriteEpisodes = localStorage.getItem(LOCAL_STORAGE_KEY);
     const favoriteEpisodesBySeries = (favoriteEpisodes ? JSON.parse(favoriteEpisodes) : {}) as FavoriteEpisodesBySeries;
 
     setSeriesById(Object.entries(favoriteEpisodesBySeries))
 
     const handleStorageChange = () => {
-      setSeriesById(Object.entries(JSON.parse(localStorage.getItem('favoriteEpisodes') || '{}')))
+      setSeriesById(Object.entries(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '{}')))
     }
 
     window.addEventListener('storage', handleStorageChange)

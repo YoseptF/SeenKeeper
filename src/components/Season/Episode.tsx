@@ -3,6 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 
+import { LOCAL_STORAGE_KEY } from "@/utils/defaultValues";
 import Poster from "../Poster";
 import classNames from "classnames";
 
@@ -30,7 +31,7 @@ const Episode: FC<EpisodeProps> = ({
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    const favoriteEpisodes = localStorage.getItem('favoriteEpisodes');
+    const favoriteEpisodes = localStorage.getItem(LOCAL_STORAGE_KEY);
     const parsedFavoriteEpisodes = favoriteEpisodes ? JSON.parse(favoriteEpisodes) : {};
 
     if (parsedFavoriteEpisodes[seriesId]?.seasons?.[season]?.[EpisodeNumber]) {
@@ -39,7 +40,7 @@ const Episode: FC<EpisodeProps> = ({
   }, [Title, seriesId, EpisodeNumber, season])
 
   const handleFavorite = () => {
-    const favoriteEpisodes = localStorage.getItem('favoriteEpisodes');
+    const favoriteEpisodes = localStorage.getItem(LOCAL_STORAGE_KEY);
     const parsedFavoriteEpisodes = favoriteEpisodes ? JSON.parse(favoriteEpisodes) : {};
 
     if (isFavorite) {
@@ -71,7 +72,7 @@ const Episode: FC<EpisodeProps> = ({
     };
   
 
-  localStorage.setItem('favoriteEpisodes', JSON.stringify(parsedFavoriteEpisodes));
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(parsedFavoriteEpisodes));
   window.dispatchEvent(new StorageEvent('storage'));
 
   setIsFavorite(!isFavorite);

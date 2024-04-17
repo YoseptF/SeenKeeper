@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 
 import Image from "next/image";
+import { LOCAL_STORAGE_KEY } from "@/utils/defaultValues";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 
@@ -11,12 +12,12 @@ const Header: FC = () => {
   const [hasFavorites, setHasFavorites] = useState(false);
 
   useEffect(() => {
-    const favoriteEpisodes = localStorage.getItem('favoriteEpisodes');
+    const favoriteEpisodes = localStorage.getItem(LOCAL_STORAGE_KEY);
     const hasFavoritesFromStorage = (favoriteEpisodes || `{}`).length > 2;
     setHasFavorites(hasFavoritesFromStorage);
 
     const storageEventHandler = () => {
-      const favoriteEpisodes = localStorage.getItem('favoriteEpisodes');
+      const favoriteEpisodes = localStorage.getItem(LOCAL_STORAGE_KEY);
       const hasFavoritesFromStorage = (favoriteEpisodes || `{}`).length > 2;
       setHasFavorites(hasFavoritesFromStorage);
     }

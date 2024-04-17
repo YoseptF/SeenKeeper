@@ -208,3 +208,5 @@ export const loadingResults: ResultProps[] = Array.from({ length: 100 }, (_, i) 
     Type: "movie",
     Poster: "/loading.png"
 }));
+
+export const LOCAL_STORAGE_KEY = 'favoriteEpisodes';
