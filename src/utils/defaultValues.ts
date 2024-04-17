@@ -1,4 +1,5 @@
 import { ResultProps } from "@/components/ResultsShowcase/Result";
+import { SeriesDescription } from "@/components/Description";
 
 export const defaultResults: ResultProps[] = [
     {
@@ -212,3 +213,28 @@ export const loadingResults: ResultProps[] = Array.from({ length: 100 }, (_, i) 
 export const LOCAL_STORAGE_KEY = 'favoriteEpisodes';
 
 export const PATHS_WITHOUT_SEARCH_BAR = ['/favorites', '/series'];
+
+export const defaultSeries: SeriesDescription = {
+    Title: "Loading...",
+    Poster: "/loading.png",
+    Year: "Loading...",
+    Rated: "Loading...",
+    Released: "Loading...",
+    Runtime: "Loading...",
+    Genre: "Loading...",
+    Director: "Loading...",
+    Writer: "Loading...",
+    Actors: "Loading...",
+    Plot: "Loading...",
+    Language: "Loading...",
+    Country: "Loading...",
+    Awards: "Loading...",
+    Ratings: [],
+    Metascore: "Loading...",
+    imdbRating: "Loading...",
+    imdbVotes: "Loading...",
+    imdbID: "Loading...",
+    Type: "Loading...",
+    totalSeasons: "Loading...",
+    Response: "Loading..."
+  }

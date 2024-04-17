@@ -8,6 +8,7 @@ import { FaRegCircleLeft } from "react-icons/fa6";
 import Placeholder from "@/components/Placeholder";
 import Poster from "@/components/Poster";
 import Season from "@/components/Season";
+import { defaultSeries } from "@/utils/defaultValues";
 import { generateUrl } from "@/utils";
 
 interface ErrorResult {
@@ -16,31 +17,6 @@ interface ErrorResult {
 }
 
 type Result = SeriesDescription | ErrorResult;
-
-const defaultSeries: SeriesDescription = {
-  Title: "Loading...",
-  Poster: "/loading.png",
-  Year: "Loading...",
-  Rated: "Loading...",
-  Released: "Loading...",
-  Runtime: "Loading...",
-  Genre: "Loading...",
-  Director: "Loading...",
-  Writer: "Loading...",
-  Actors: "Loading...",
-  Plot: "Loading...",
-  Language: "Loading...",
-  Country: "Loading...",
-  Awards: "Loading...",
-  Ratings: [],
-  Metascore: "Loading...",
-  imdbRating: "Loading...",
-  imdbVotes: "Loading...",
-  imdbID: "Loading...",
-  Type: "Loading...",
-  totalSeasons: "Loading...",
-  Response: "Loading..."
-}
 
 const Series: FC = () => {
   const searchParams = useSearchParams()
