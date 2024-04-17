@@ -1,15 +1,16 @@
 'use client';
 
 import { FC, useEffect, useState } from "react";
-import ResultsShowcase, { SearchHits } from "@/components/ResultsShowcase";
 import { defaultResults, loadingResults } from "@/utils/defaultValues";
 import { useRouter, useSearchParams } from "next/navigation";
 
+import { ResultProps } from "@/components/ResultsShowcase/Result";
+import ResultsShowcase from "@/components/ResultsShowcase";
 import { generateUrl } from "@/utils";
 
 interface SearchResultSuccess {
   Response: string,
-  Search: SearchHits[],
+  Search: ResultProps[],
   totalResults: string
 }
 
@@ -37,7 +38,7 @@ const Search: FC = () => {
         return;
       };
 
-      let bufferResults: SearchHits[] = [];
+      let bufferResults: ResultProps[] = [];
 
       setResults(currentResults => {
         bufferResults = currentResults;

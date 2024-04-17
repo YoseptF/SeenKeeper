@@ -1,6 +1,6 @@
-import { SearchHits } from "@/components/ResultsShowcase";
+import { ResultProps } from "@/components/ResultsShowcase/Result";
 
-export const defaultResults: SearchHits[] = [
+export const defaultResults: ResultProps[] = [
     {
         "Title": "Game of Thrones",
         "Year": "2011–2019",
@@ -201,7 +201,7 @@ export const defaultResults: SearchHits[] = [
 ]
 
 
-export const loadingResults: SearchHits[] = Array.from({ length: 100 }, (_, i) => ({
+export const loadingResults: ResultProps[] = Array.from({ length: 100 }, (_, i) => ({
     Title: `Loading ${i + 1}`,
     Year: "2021",
     imdbID: `${i + 1}`,
