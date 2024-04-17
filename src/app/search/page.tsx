@@ -67,8 +67,6 @@ const Search: FC = () => {
       }
 
       setResults(data.Search);
-
-      console.debug(data);
     }
 
     if (search) fetchResults();

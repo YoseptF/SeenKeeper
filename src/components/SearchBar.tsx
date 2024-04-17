@@ -17,17 +17,13 @@ const SearchBar: FC = () => {
   const query = searchParams.get('query');
   const id = searchParams.get('id');
 
-  const debouncedSearch = debounce(async (query: string) => {
-    console.debug(`Searching for ${query}`);
-    router.push(`/search?query=${query}`)
-  }, 350);
+  const debouncedSearch = debounce(async (query: string) => router.push(`/search?query=${query}`), 350);
 
   const pathname = usePathname();
-  console.debug('+++pathname', pathname);
 
   const handleSearchChange: ChangeEventHandler<HTMLInputElement> = (e) => debouncedSearch(e.target.value);
 
-  if(id || pathname === '/favorites') return null;
+  if (id || pathname === '/favorites') return null;
 
   return (
     <section className="w-full relative">

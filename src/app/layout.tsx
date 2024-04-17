@@ -20,22 +20,21 @@ export const metadata: Metadata = {
   description: "Keep your favorite series in one place",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
-  console.debug('--RootLayout', Date.now());
-  return (
-    <html lang="en">
-      <body className={classNames(
-        inter.className,
-        poppins.variable,
-        'flex flex-col min-h-screen'
-      )}>
-        <Header />
-        <main className="h-full">{children}</main>
-      </body>
-    </html>
-  );
-}
+}>) => (
+  <html lang="en">
+    <body className={classNames(
+      inter.className,
+      poppins.variable,
+      'flex flex-col min-h-screen'
+    )}>
+      <Header />
+      <main className="h-full">{children}</main>
+    </body>
+  </html>
+);
+
+export default RootLayout;
