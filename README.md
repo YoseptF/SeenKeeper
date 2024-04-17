@@ -1,5 +1,5 @@
 ## Seen Keeper
-A simple web app to keep track of the movies you've seen.
+A simple web app to keep track of your favorite episodes from your favorite series (double favorite!!!).
 
 ![alt text](site.png)
 
