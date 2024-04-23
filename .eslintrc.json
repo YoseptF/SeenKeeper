@@ -9,9 +9,16 @@
     "prefer-template": "error",
     "semi": ["error", "always"],
     "arrow-parens": ["error", "always"],
-    "object-shorthand": ["error", "always"]
+    "object-shorthand": ["error", "always"],
+    "react/jsx-wrap-multilines": ["error", { "declaration": "parens-new-line" }]
   },
   "plugins": [
-    "@typescript-eslint"
-  ]
+    "@typescript-eslint",
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
 }

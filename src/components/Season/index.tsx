@@ -2,7 +2,6 @@
 
 import Episode, { EpisodeProps } from "./Episode";
 import { FC, useEffect, useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
 
 import Placeholder from "../Placeholder";
 import RowTitle from "./RowTitle";
