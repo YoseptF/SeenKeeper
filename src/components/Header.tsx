@@ -1,34 +1,16 @@
 'use client';
 
-import { FC, useEffect, useState } from "react";
+import { FC, useContext } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 
+import { FavoritesContext } from "@/contexts/Favorites";
 import Image from "next/image";
-import { LOCAL_STORAGE_KEY } from "@/utils/defaultValues";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 
 const Header: FC = () => {
-  const [hasFavorites, setHasFavorites] = useState(false);
 
-  useEffect(() => {
-    const favoriteEpisodes = localStorage.getItem(LOCAL_STORAGE_KEY);
-    const hasFavoritesFromStorage = (favoriteEpisodes || `{}`).length > 2;
-    setHasFavorites(hasFavoritesFromStorage);
-
-    const storageEventHandler = (e: StorageEvent) => {
-      if (!e.newValue) throw new Error('No new value in storage event');
-      console.debug('Storage event', e.newValue);
-      const hasFavoritesFromStorage = e.newValue.length > 2;
-      setHasFavorites(hasFavoritesFromStorage);
-    }
-
-    window.addEventListener('storage', storageEventHandler);
-
-    return () => {
-      window.removeEventListener('storage', storageEventHandler);
-    }
-  }, [])
+  const { hasFavorites } = useContext(FavoritesContext);
 
   return (
     <nav className="flex flex-col items-center gap-2 [&>*]:max-w-5xl">

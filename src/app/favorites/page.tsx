@@ -1,35 +1,15 @@
 'use client';
 
-import { FC, useEffect, useMemo, useState } from "react";
-import FavoriteSeries, { FavoriteSeriesInfo } from "@/components/FavoriteSeries";
+import { FC, useContext, useMemo } from "react";
 
-import { LOCAL_STORAGE_KEY } from "@/utils/defaultValues";
+import FavoriteSeries from "@/components/FavoriteSeries";
+import { FavoritesContext } from "@/contexts/Favorites";
 import Placeholder from "@/components/Placeholder";
 
-type FavoriteEpisodesBySeries = {
-  [seriesId: string]: FavoriteSeriesInfo,
-}
-
 const Favorites: FC = () => {
-  const [seriesById, setSeriesById] = useState<[string, FavoriteSeriesInfo][]>([]);
+  const { favoriteEpisodes } = useContext(FavoritesContext);
 
-  useEffect(() => {
-    const favoriteEpisodes = localStorage.getItem(LOCAL_STORAGE_KEY);
-    const favoriteEpisodesBySeries = (favoriteEpisodes ? JSON.parse(favoriteEpisodes) : {}) as FavoriteEpisodesBySeries;
-
-    setSeriesById(Object.entries(favoriteEpisodesBySeries))
-
-    const handleStorageChange = (e: StorageEvent) => {
-      if(!e.newValue) throw new Error('No new value in storage event')
-      setSeriesById(Object.entries(JSON.parse(e.newValue)))
-    }
-
-    window.addEventListener('storage', handleStorageChange)
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange)
-    }
-  },[])
+  const seriesById = useMemo(() => Object.entries(favoriteEpisodes), [favoriteEpisodes]);
 
   return (
     <div className="flex flex-col items-center justify-center h-full">

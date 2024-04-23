@@ -1,22 +1,14 @@
 'use client';
 
-import { FC, useEffect, useState } from "react";
+import { EpisodeInfo, setFavorites } from "@/lib/db";
+import { FC, useContext } from "react";
+import { FavoritesContext, useIsFavorite } from "@/contexts/Favorites";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 
-import { LOCAL_STORAGE_KEY } from "@/utils/defaultValues";
 import Poster from "../Poster";
 import classNames from "classnames";
 
-export interface EpisodeProps {
-  Title: string;
-  Released: string;
-  Episode: string;
-  imdbRating: string;
-  backgroundImage: string;
-  seriesId: string;
-  seriesTitle: string;
-  season: string;
-}
+export interface EpisodeProps extends EpisodeInfo {}
 
 const Episode: FC<EpisodeProps> = ({
   Episode: EpisodeNumber,
@@ -28,35 +20,25 @@ const Episode: FC<EpisodeProps> = ({
   seriesTitle,
   season
 }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const isFavorite = useIsFavorite({ seriesId, season, episode: EpisodeNumber });
+  const { favoriteEpisodes } = useContext(FavoritesContext);
 
-  useEffect(() => {
-    const favoriteEpisodes = localStorage.getItem(LOCAL_STORAGE_KEY);
-    const parsedFavoriteEpisodes = favoriteEpisodes ? JSON.parse(favoriteEpisodes) : {};
-
-    if (parsedFavoriteEpisodes[seriesId]?.seasons?.[season]?.[EpisodeNumber]) {
-      setIsFavorite(true);
-    }
-  }, [Title, seriesId, EpisodeNumber, season])
 
   const handleFavorite = () => {
-    const favoriteEpisodes = localStorage.getItem(LOCAL_STORAGE_KEY);
-    const parsedFavoriteEpisodes = favoriteEpisodes ? JSON.parse(favoriteEpisodes) : {};
-
+    const bufferFavorites = structuredClone(favoriteEpisodes);
+    console.debug('bufferFavorites', bufferFavorites);
     if (isFavorite) {
-      delete parsedFavoriteEpisodes[seriesId].seasons[season][EpisodeNumber];
-      if (Object.keys(parsedFavoriteEpisodes[seriesId].seasons[season]).length === 0) {
-        delete parsedFavoriteEpisodes[seriesId];
-
-        window.dispatchEvent(new StorageEvent('storage', { newValue: JSON.stringify(parsedFavoriteEpisodes) }));
+      delete bufferFavorites[seriesId].seasons[season][EpisodeNumber];
+      if (Object.keys(bufferFavorites[seriesId].seasons[season]).length === 0) {
+        delete bufferFavorites[seriesId];
       }
     } else {
-      parsedFavoriteEpisodes[seriesId] = {
-        series: seriesTitle,
+      bufferFavorites[seriesId] = {
+        seriesName: seriesTitle,
         seasons: {
-          ...parsedFavoriteEpisodes[seriesId]?.seasons,
+          ...bufferFavorites[seriesId]?.seasons,
           [season]: {
-            ...parsedFavoriteEpisodes[seriesId]?.seasons?.[season],
+            ...bufferFavorites[seriesId]?.seasons?.[season],
             [EpisodeNumber]: {
               Title,
               Released,
@@ -64,18 +46,15 @@ const Episode: FC<EpisodeProps> = ({
               backgroundImage,
               seriesId,
               seriesTitle,
-              Episode: EpisodeNumber
-            } as EpisodeProps
+              Episode: EpisodeNumber,
+              season: season
+            }
           }
         },
       }
     };
 
-
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(parsedFavoriteEpisodes));
-    window.dispatchEvent(new StorageEvent('storage', { newValue: JSON.stringify(parsedFavoriteEpisodes) }));
-
-    setIsFavorite(!isFavorite);
+    setFavorites(bufferFavorites);
   }
 
   return (
