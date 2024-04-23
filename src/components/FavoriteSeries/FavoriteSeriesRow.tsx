@@ -21,7 +21,7 @@ const FavoriteSeriesRow: FC<FavoriteSeriesRowProps> = ({
   seriesName
 }) => (
   <div className="flex flex-col gap-4">
-    <Link href={`/series?id=${seriesId}`} className="flex gap-3 items-center hover:text-gray-500 hover:underline w-fit">
+    <Link href={`/series?id=${seriesId}#season-${seasonId}`} className="flex gap-3 items-center hover:text-gray-500 hover:underline w-fit">
       <RowTitle Season={seasonId} Title={seriesName} />
       <FaExternalLinkAlt className="text-xl text-white" />
     </Link>

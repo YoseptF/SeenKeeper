@@ -8,7 +8,7 @@ import { GoHeart, GoHeartFill } from "react-icons/go";
 import Poster from "../Poster";
 import classNames from "classnames";
 
-export interface EpisodeProps extends EpisodeInfo {}
+export interface EpisodeProps extends EpisodeInfo { }
 
 const Episode: FC<EpisodeProps> = ({
   Episode: EpisodeNumber,
@@ -29,7 +29,10 @@ const Episode: FC<EpisodeProps> = ({
     if (isFavorite) {
       delete bufferFavorites[seriesId].seasons[season][EpisodeNumber];
       if (Object.keys(bufferFavorites[seriesId].seasons[season]).length === 0) {
-        delete bufferFavorites[seriesId];
+        delete bufferFavorites[seriesId].seasons[season];
+        if (Object.keys(bufferFavorites[seriesId].seasons).length === 0) {
+          delete bufferFavorites[seriesId];
+        }
       }
     } else {
       bufferFavorites[seriesId] = {

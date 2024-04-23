@@ -6,6 +6,4 @@ const localStorageMock = {
 
 if (typeof window === "undefined") {
   global.localStorage = localStorageMock;
-  global.window = {};
-  global.window.localStorage = localStorageMock;
 }
