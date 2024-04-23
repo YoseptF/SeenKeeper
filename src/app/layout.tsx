@@ -1,10 +1,11 @@
+import '../utils/polyfillLocalStorage'
 import "./globals.css";
 
 import { Inter, Poppins } from "next/font/google";
 
+import FavoritesProvider from "@/contexts/Favorites";
 import Header from "@/components/Header";
 import type { Metadata } from "next";
-import Search from "@/components/SearchBar";
 import classNames from "classnames";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -31,8 +32,10 @@ const RootLayout = ({
       poppins.variable,
       'flex flex-col min-h-screen'
     )}>
-      <Header />
-      <main className="h-full">{children}</main>
+      <FavoritesProvider>
+        <Header />
+        <main className="h-full">{children}</main>
+      </FavoritesProvider>
     </body>
   </html>
 );

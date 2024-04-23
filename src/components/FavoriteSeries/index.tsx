@@ -1,21 +1,10 @@
-import Episode, { EpisodeProps } from "../Season/Episode";
-
 import { FC } from "react";
 import FavoriteSeriesRow from "./FavoriteSeriesRow";
-import RowTitle from "../Season/RowTitle";
-
-export interface FavoriteSeriesInfo {
-  series: string;
-  seasons: {
-    [seasonId: string]: {
-      [episodeNumber: string]: EpisodeProps
-    }
-  }
-}
+import { SeriesInfo } from "@/lib/db";
 
 export interface FavoriteSeriesProps {
   seriesId: string;
-  series: FavoriteSeriesInfo;
+  series: SeriesInfo;
 }
 
 const FavoriteSeries: FC<FavoriteSeriesProps> = ({
@@ -28,7 +17,7 @@ const FavoriteSeries: FC<FavoriteSeriesProps> = ({
         <FavoriteSeriesRow
           key={`series-${seriesId}-season-${seasonId}`}
           season={season}
-          seriesName={series.series}
+          seriesName={series.seriesName}
           seasonId={seasonId}
           seriesId={seriesId}
         />
