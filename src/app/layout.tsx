@@ -1,3 +1,4 @@
+import '../utils/polyfillLocalStorage'
 import "./globals.css";
 
 import { Inter, Poppins } from "next/font/google";
@@ -5,7 +6,6 @@ import { Inter, Poppins } from "next/font/google";
 import FavoritesProvider from "@/contexts/Favorites";
 import Header from "@/components/Header";
 import type { Metadata } from "next";
-import Search from "@/components/SearchBar";
 import classNames from "classnames";
 
 const inter = Inter({ subsets: ["latin"] });
