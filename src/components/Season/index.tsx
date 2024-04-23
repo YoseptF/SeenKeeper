@@ -1,8 +1,10 @@
 'use client';
 
 import Episode, { EpisodeProps } from "./Episode";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
+import Placeholder from "../Placeholder";
 import RowTitle from "./RowTitle";
 import { generateUrl } from "@/utils";
 
@@ -51,6 +53,7 @@ const Season: FC<SeasonProps> = ({
 }) => {
 
   const [series, setSeries] = useState(defaultSeries);
+  const scrolled = useRef(false);
 
   useEffect(() => {
     let ignore = false;
@@ -76,6 +79,7 @@ const Season: FC<SeasonProps> = ({
 
       if ('Error' in data) {
         console.error(data.Error);
+        setSeries({ ...defaultSeries, Episodes: [] });
         return;
       }
 
@@ -88,21 +92,38 @@ const Season: FC<SeasonProps> = ({
     return () => { ignore = true; };
   }, [seasonId, seriesId]);
 
+  const handleAutoScroll = (node: HTMLElement | null) => {
+    if (node && !scrolled.current) {
+      if (window.location.hash.split("#").includes(`season-${seasonId}`)) {
+        scrolled.current = true;
+        setTimeout(() => {
+          node.scrollIntoView({ block: "end", behavior: "smooth" });
+        }, 350);
+      }
+    }
+  };
+
   return (
-    <section className="flex flex-col gap-4">
-      <RowTitle Season={series.Season} Title={series.Title} />
+    <section
+      className="flex flex-col gap-4"
+      id={`season-${seasonId}`}
+      ref={handleAutoScroll}
+    >
+      <RowTitle Season={seasonId} Title={seriesTitle} />
       <ul className="flex gap-3 flex-wrap">
         {
-          series.Episodes.map((episode, i) => (
-            <Episode
-              key={i}
-              {...episode}
-              backgroundImage={seriesBackgroundImage}
-              seriesId={seriesId}
-              seriesTitle={seriesTitle}
-              season={seasonId}
-            />
-          ))
+          series.Episodes.length > 0
+            ? series.Episodes.map((episode, i) => (
+              <Episode
+                key={i}
+                {...episode}
+                backgroundImage={seriesBackgroundImage}
+                seriesId={seriesId}
+                seriesTitle={seriesTitle}
+                season={seasonId}
+              />
+            ))
+            : <Placeholder message="No episodes found for this season." />
         }
       </ul>
     </section>

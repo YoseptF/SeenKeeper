@@ -11,7 +11,6 @@ const RowTitle: FC<RowTitleProps> = ({
 }) => (
   <h2
     className="text-white text-3xl"
-    id={`season-${Season}`}
   >{Title} - Season {Season}</h2>
 );
 
