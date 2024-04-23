@@ -16,12 +16,13 @@ const Header: FC = () => {
     const hasFavoritesFromStorage = (favoriteEpisodes || `{}`).length > 2;
     setHasFavorites(hasFavoritesFromStorage);
 
-    const storageEventHandler = () => {
-      const favoriteEpisodes = localStorage.getItem(LOCAL_STORAGE_KEY);
-      const hasFavoritesFromStorage = (favoriteEpisodes || `{}`).length > 2;
+    const storageEventHandler = (e: StorageEvent) => {
+      if (!e.newValue) throw new Error('No new value in storage event');
+      console.debug('Storage event', e.newValue);
+      const hasFavoritesFromStorage = e.newValue.length > 2;
       setHasFavorites(hasFavoritesFromStorage);
     }
-    
+
     window.addEventListener('storage', storageEventHandler);
 
     return () => {

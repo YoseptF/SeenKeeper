@@ -48,7 +48,7 @@ const Episode: FC<EpisodeProps> = ({
       if (Object.keys(parsedFavoriteEpisodes[seriesId].seasons[season]).length === 0) {
         delete parsedFavoriteEpisodes[seriesId];
 
-        window.dispatchEvent(new StorageEvent('storage'));
+        window.dispatchEvent(new StorageEvent('storage', { newValue: JSON.stringify(parsedFavoriteEpisodes) }));
       }
     } else {
       parsedFavoriteEpisodes[seriesId] = {
@@ -70,52 +70,52 @@ const Episode: FC<EpisodeProps> = ({
         },
       }
     };
-  
 
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(parsedFavoriteEpisodes));
-  window.dispatchEvent(new StorageEvent('storage'));
 
-  setIsFavorite(!isFavorite);
-}
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(parsedFavoriteEpisodes));
+    window.dispatchEvent(new StorageEvent('storage', { newValue: JSON.stringify(parsedFavoriteEpisodes) }));
 
-return (
-  <li
-    className={(classNames(
-      "relative text-white cursor-pointer hover:text-start",
-      "[&:hover_button]:scale-125 transition-transform duration-300 ease-in-out animate-fade-in",
-    ))}
-    onClick={handleFavorite}
-  >
-    <Poster backgroundImage={backgroundImage} height={300} width={300} blurry />
-    <div className={classNames(
-      "absolute p-2 bg-[#00000025] rounded-lg",
-      "top-1/2 -translate-y-1/2",
-      "left-1/2 -translate-x-1/2",
-      "[&>*]:w-max [&>*]:max-w-44",
-      "pointer-events-none"
-    )}>
-      <h3><strong>Title:</strong> {Title}</h3>
-      <p><strong>Episode:</strong> {EpisodeNumber}</p>
-      <p><strong>Released:</strong> {Released}</p>
-      <p><strong>Rating:</strong> {imdbRating}</p>
-    </div>
-    <div className={classNames(
-      "absolute p-2 bg-[#00000025] rounded-lg",
-      "top-2 right-2",
-      "pointer-events-none"
-    )}>
-      <button
-        className="text-red-500"
-      >
-        {
-          isFavorite
-            ? <GoHeartFill size={24} />
-            : <GoHeart size={24} />
-        }
-      </button>
-    </div>
-  </li>
-)
+    setIsFavorite(!isFavorite);
+  }
+
+  return (
+    <li
+      className={(classNames(
+        "relative text-white cursor-pointer hover:text-start",
+        "[&:hover_button]:scale-125 transition-transform duration-300 ease-in-out animate-fade-in",
+      ))}
+      onClick={handleFavorite}
+    >
+      <Poster backgroundImage={backgroundImage} height={300} width={300} blurry />
+      <div className={classNames(
+        "absolute p-2 bg-[#00000025] rounded-lg",
+        "top-1/2 -translate-y-1/2",
+        "left-1/2 -translate-x-1/2",
+        "[&>*]:w-max [&>*]:max-w-44",
+        "pointer-events-none"
+      )}>
+        <h3><strong>Title:</strong> {Title}</h3>
+        <p><strong>Episode:</strong> {EpisodeNumber}</p>
+        <p><strong>Released:</strong> {Released}</p>
+        <p><strong>Rating:</strong> {imdbRating}</p>
+      </div>
+      <div className={classNames(
+        "absolute p-2 bg-[#00000025] rounded-lg",
+        "top-2 right-2",
+        "pointer-events-none"
+      )}>
+        <button
+          className="text-red-500"
+        >
+          {
+            isFavorite
+              ? <GoHeartFill size={24} />
+              : <GoHeart size={24} />
+          }
+        </button>
+      </div>
+    </li>
+  )
 }
 
 export default Episode;

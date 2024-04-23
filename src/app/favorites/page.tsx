@@ -19,8 +19,9 @@ const Favorites: FC = () => {
 
     setSeriesById(Object.entries(favoriteEpisodesBySeries))
 
-    const handleStorageChange = () => {
-      setSeriesById(Object.entries(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '{}')))
+    const handleStorageChange = (e: StorageEvent) => {
+      if(!e.newValue) throw new Error('No new value in storage event')
+      setSeriesById(Object.entries(JSON.parse(e.newValue)))
     }
 
     window.addEventListener('storage', handleStorageChange)
