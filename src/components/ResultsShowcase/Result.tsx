@@ -16,18 +16,16 @@ const Result: FC<ResultProps> = ({
   Type,
   Year,
   imdbID
-}) => {
-  return (
-    <Link key={imdbID} href={`/${Type}?id=${imdbID}`}>
-      <article className="flex flex-col gap-2 ">
-        <PosterComponent backgroundImage={Poster} />
-        <div>
-          <h2 className="font-bold max-w-72 text-white">{Title}</h2>
-          <p className="text-gray-300">{Year}</p>
-        </div>
-      </article>
-    </Link>
-  )
-}
+}) => (
+  <Link key={imdbID} href={`/${Type}?id=${imdbID}`}>
+    <article className="flex flex-col gap-2 ">
+      <PosterComponent backgroundImage={Poster} />
+      <div>
+        <h2 className="font-bold max-w-72 text-white">{Title}</h2>
+        <p className="text-gray-300">{Year}</p>
+      </div>
+    </article>
+  </Link>
+);
 
 export default Result;

@@ -13,23 +13,21 @@ const Poster: FC<PosterProps> = ({
   width = 300,
   height = 450,
   blurry
-}) => {
-  return (
-    <div
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        width,
-        height
-      }}
-      className={
-        classNames(
-          "bg-cover bg-center rounded-lg shadow-lg",
-          "hover:scale-105 transition-transform duration-300 ease-in-out animate-fade-in",
-          blurry && "filter blur-sm"
-        )
-      }
-    />
-  )
-}
+}) => (
+  <div
+    style={{
+      backgroundImage: `url(${backgroundImage})`,
+      width,
+      height
+    }}
+    className={
+      classNames(
+        "bg-cover bg-center rounded-lg shadow-lg",
+        "hover:scale-105 transition-transform duration-300 ease-in-out animate-fade-in",
+        blurry && "filter blur-sm"
+      )
+    }
+  />
+);
 
 export default Poster;

@@ -34,19 +34,19 @@ const Description: FC<SeriesDescription> = (props) => (
   <div className="flex flex-col gap-2 text-white">
     {
       Object.entries(props)
-      .filter(([key]) => !ignoreKeys.includes(key))
-      .map(([key, value]) => (
-        <p
-          key={`detail-${key}`}
-          className="max-w-2xl"
-        >
-          <strong>{key}:</strong>
-          &nbsp;
-          {String(value)}
-        </p>
-      ))
+        .filter(([key]) => !ignoreKeys.includes(key))
+        .map(([key, value]) => (
+          <p
+            key={`detail-${key}`}
+            className="max-w-2xl"
+          >
+            <strong>{key}:</strong>
+            &nbsp;
+            {String(value)}
+          </p>
+        ))
     }
   </div>
-)
+);
 
 export default Description;

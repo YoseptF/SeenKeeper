@@ -48,7 +48,7 @@ const SearchBar: FC = () => {
         )
       }
     </section>
-  )
-}
+  );
+};
 
 export default SearchBar;

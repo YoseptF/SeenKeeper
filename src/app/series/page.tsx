@@ -19,10 +19,10 @@ interface ErrorResult {
 type Result = SeriesDescription | ErrorResult;
 
 const Series: FC = () => {
-  const searchParams = useSearchParams()
-  const router = useRouter()
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-  const [series, setSeries] = useState(defaultSeries)
+  const [series, setSeries] = useState(defaultSeries);
 
   const id = searchParams.get('id');
 
@@ -38,7 +38,7 @@ const Series: FC = () => {
           i: id.trim(),
           apikey: process.env.NEXT_PUBLIC_OMDB_API_KEY,
         }
-      })
+      });
 
       const response = await fetch(url);
 
@@ -52,18 +52,18 @@ const Series: FC = () => {
       }
 
       setSeries(data);
-    }
+    };
 
     fetchData();
 
-    return () => { ignore = true }
-  }, [id])
+    return () => { ignore = true; };
+  }, [id]);
 
   if (!id) return null;
 
-  const episodesInDatabase = Number(series.totalSeasons)
+  const episodesInDatabase = Number(series.totalSeasons);
 
-  const hasEpisodesInDatabase = !Number.isNaN(episodesInDatabase)
+  const hasEpisodesInDatabase = !Number.isNaN(episodesInDatabase);
 
   return (
     <section className="p-5 flex gap-4 flex-col items-center">
@@ -91,7 +91,7 @@ const Series: FC = () => {
         }
       </section>
     </section>
-  )
-}
+  );
+};
 
 export default Series;

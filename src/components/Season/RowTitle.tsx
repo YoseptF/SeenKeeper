@@ -9,7 +9,10 @@ const RowTitle: FC<RowTitleProps> = ({
   Season,
   Title
 }) => (
-  <h2 className="text-white text-3xl">{Title} - Season {Season}</h2>
-)
+  <h2
+    className="text-white text-3xl"
+    id={`season-${Season}`}
+  >{Title} - Season {Season}</h2>
+);
 
 export default RowTitle;

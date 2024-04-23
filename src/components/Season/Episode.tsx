@@ -26,7 +26,6 @@ const Episode: FC<EpisodeProps> = ({
 
   const handleFavorite = () => {
     const bufferFavorites = structuredClone(favoriteEpisodes);
-    console.debug('bufferFavorites', bufferFavorites);
     if (isFavorite) {
       delete bufferFavorites[seriesId].seasons[season][EpisodeNumber];
       if (Object.keys(bufferFavorites[seriesId].seasons[season]).length === 0) {
@@ -47,15 +46,15 @@ const Episode: FC<EpisodeProps> = ({
               seriesId,
               seriesTitle,
               Episode: EpisodeNumber,
-              season: season
+              season
             }
           }
         },
-      }
+      };
     };
 
     setFavorites(bufferFavorites);
-  }
+  };
 
   return (
     <li
@@ -94,7 +93,7 @@ const Episode: FC<EpisodeProps> = ({
         </button>
       </div>
     </li>
-  )
-}
+  );
+};
 
 export default Episode;
