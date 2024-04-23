@@ -24,6 +24,6 @@ const FavoriteSeries: FC<FavoriteSeriesProps> = ({
       ))
     }
   </div>
-)
+);
 
 export default FavoriteSeries;

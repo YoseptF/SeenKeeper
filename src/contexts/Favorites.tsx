@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { FC, ReactNode, createContext, useCallback, useContext, useEffect, useState } from "react";
+import { FC, ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { FavoriteEpisodesBySeries, getFavorites } from "@/lib/db";
 
 interface IFavoritesContext {
@@ -8,12 +8,12 @@ interface IFavoritesContext {
   hasFavorites: boolean
 }
 
-const initialFavoriteEpisodes = getFavorites()
+const initialFavoriteEpisodes = getFavorites();
 
 export const FavoritesContext = createContext<IFavoritesContext>({
   favoriteEpisodes: initialFavoriteEpisodes,
   hasFavorites: Object.keys(initialFavoriteEpisodes).length > 0,
-})
+});
 
 interface FavoritesProviderProps {
   children: ReactNode
@@ -25,26 +25,26 @@ const FavoritesProvider: FC<FavoritesProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
-      if (!e.newValue) throw new Error('No new value in storage event')
-      const favoriteEpisodes = JSON.parse(e.newValue) as FavoriteEpisodesBySeries
-      setFavorites(favoriteEpisodes)
-      setHasFavorites(Object.keys(favoriteEpisodes).length > 0)
-    }
+      if (!e.newValue) throw new Error('No new value in storage event');
+      const favoriteEpisodes = JSON.parse(e.newValue) as FavoriteEpisodesBySeries;
+      setFavorites(favoriteEpisodes);
+      setHasFavorites(Object.keys(favoriteEpisodes).length > 0);
+    };
 
-    window.addEventListener('storage', handleStorageChange)
+    window.addEventListener('storage', handleStorageChange);
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange)
-    }
+      window.removeEventListener('storage', handleStorageChange);
+    };
 
-  })
+  });
 
   return (
     <FavoritesContext.Provider value={{ favoriteEpisodes, hasFavorites }}>
       {children}
     </FavoritesContext.Provider>
-  )
-}
+  );
+};
 
 interface UseIsFavoriteProps {
   seriesId: string;
@@ -53,15 +53,15 @@ interface UseIsFavoriteProps {
 }
 
 export const useIsFavorite = ({ episode, season, seriesId }: UseIsFavoriteProps) => {
-  const { favoriteEpisodes } = useContext(FavoritesContext)
+  const { favoriteEpisodes } = useContext(FavoritesContext);
 
-  const [isFavorite, setIsFavorite] = useState(!!favoriteEpisodes[seriesId]?.seasons[season]?.[episode])
+  const [isFavorite, setIsFavorite] = useState(!!favoriteEpisodes[seriesId]?.seasons[season]?.[episode]);
 
   useEffect(() => {
-    setIsFavorite(!!favoriteEpisodes[seriesId]?.seasons[season]?.[episode])
-  }, [favoriteEpisodes, seriesId, season, episode])
+    setIsFavorite(!!favoriteEpisodes[seriesId]?.seasons[season]?.[episode]);
+  }, [favoriteEpisodes, seriesId, season, episode]);
 
-  return isFavorite
-}
+  return isFavorite;
+};
 
 export default FavoritesProvider;

@@ -38,6 +38,6 @@ const FavoriteSeriesRow: FC<FavoriteSeriesRowProps> = ({
       }
     </ul>
   </div>
-)
+);
 
 export default FavoriteSeriesRow;

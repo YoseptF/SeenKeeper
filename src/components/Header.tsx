@@ -38,7 +38,7 @@ const Header: FC = () => {
       </div>
       <SearchBar />
     </nav>
-  )
-}
+  );
+};
 
 export default Header;

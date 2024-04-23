@@ -1,4 +1,4 @@
-import '../utils/polyfillLocalStorage'
+import '../utils/polyfillLocalStorage';
 import "./globals.css";
 
 import { Inter, Poppins } from "next/font/google";

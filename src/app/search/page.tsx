@@ -24,7 +24,7 @@ type SearchResult = SearchResultSuccess | SearchResultError;
 const Search: FC = () => {
   const [results, setResults] = useState(defaultResults);
 
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   const search = searchParams.get('query');
 
@@ -40,7 +40,7 @@ const Search: FC = () => {
 
       let bufferResults: ResultProps[] = [];
 
-      setResults(currentResults => {
+      setResults((currentResults) => {
         bufferResults = currentResults;
         return loadingResults;
       });
@@ -52,7 +52,7 @@ const Search: FC = () => {
           apikey: process.env.NEXT_PUBLIC_OMDB_API_KEY,
           type: 'series'
         }
-      })
+      });
 
       const response = await fetch(url);
 
@@ -67,16 +67,16 @@ const Search: FC = () => {
       }
 
       setResults(data.Search);
-    }
+    };
 
     if (search) fetchResults();
 
-    return () => { ignore = true; }
-  }, [search, router])
+    return () => { ignore = true; };
+  }, [search, router]);
 
   return (
     <ResultsShowcase results={results} />
   );
-}
+};
 
 export default Search;

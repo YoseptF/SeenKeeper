@@ -24,7 +24,7 @@ const defaultSeries: EpisodesResponse = {
   Title: "Loading...",
   Season: "Loading...",
   totalSeasons: "Loading...",
-  Episodes: Array.from({ length: 10 }, (_, i) => ({
+  Episodes: Array.from({ length: 10 }, () => ({
     Title: "Loading...",
     Released: "Loading...",
     Episode: "Loading...",
@@ -34,7 +34,7 @@ const defaultSeries: EpisodesResponse = {
     season: "Loading",
     seriesTitle: "Loading"
   }))
-}
+};
 
 interface SeasonProps {
   seriesId: string;
@@ -66,7 +66,7 @@ const Season: FC<SeasonProps> = ({
           apikey: process.env.NEXT_PUBLIC_OMDB_API_KEY,
         }
 
-      })
+      });
 
       const response = await fetch(url);
 
@@ -81,12 +81,12 @@ const Season: FC<SeasonProps> = ({
 
       setSeries(data);
 
-    }
+    };
 
     fetchData();
 
-    return () => { ignore = true }
-  }, [seasonId, seriesId])
+    return () => { ignore = true; };
+  }, [seasonId, seriesId]);
 
   return (
     <section className="flex flex-col gap-4">
@@ -106,7 +106,7 @@ const Season: FC<SeasonProps> = ({
         }
       </ul>
     </section>
-  )
-}
+  );
+};
 
 export default Season;

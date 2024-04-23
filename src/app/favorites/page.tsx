@@ -28,7 +28,7 @@ const Favorites: FC = () => {
         }
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Favorites;
