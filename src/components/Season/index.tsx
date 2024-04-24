@@ -119,9 +119,9 @@ const Season: FC<SeasonProps> = ({
       <ul className="flex gap-3 flex-wrap">
         {
           series.Episodes.length > 0
-            ? series.Episodes.map((episode, i) => (
+            ? series.Episodes.map((episode) => (
               <Episode
-                key={i}
+                key={`${series.Title}-season-${seasonId}-episode-${episode.Episode}`}
                 {...episode}
                 backgroundImage={seriesBackgroundImage}
                 seriesId={seriesId}
