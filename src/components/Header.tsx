@@ -30,7 +30,11 @@ const Header: FC = () => {
           <Link href="/favorites">
             {
               hasFavorites
-                ? <GoHeartFill className="text-red-500 text-3xl cursor-pointer" />
+                ? (
+                  <div>
+                    <GoHeartFill className="text-red-500 text-3xl cursor-pointer" />
+                  </div>
+                )
                 : <GoHeart className="text-red-500 text-3xl cursor-pointer" />
             }
           </Link>
