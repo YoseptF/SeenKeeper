@@ -27,10 +27,10 @@ const defaultSeries: EpisodesResponse = {
   Title: "Loading...",
   Season: "Loading...",
   totalSeasons: "Loading...",
-  Episodes: Array.from({ length: 10 }, () => ({
+  Episodes: Array.from({ length: 10 }, (_,i) => ({
     Title: "Loading...",
     Released: "Loading...",
-    Episode: "Loading...",
+    Episode: `Loading...${i}`,
     imdbRating: "Loading...",
     backgroundImage: "/loading.png",
     seriesId: "Loading...",
