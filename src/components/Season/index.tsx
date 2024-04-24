@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import Placeholder from "../Placeholder";
 import RowTitle from "./RowTitle";
+import classNames from "classnames";
 import { generateUrl } from "@/utils";
 
 interface EpisodesResponse {
@@ -43,13 +44,15 @@ interface SeasonProps {
   seasonId: string;
   seriesBackgroundImage?: string;
   seriesTitle: string;
+  hidden?: boolean;
 }
 
 const Season: FC<SeasonProps> = ({
   seasonId,
   seriesId,
   seriesBackgroundImage = '',
-  seriesTitle
+  seriesTitle,
+  hidden
 }) => {
 
   const [series, setSeries] = useState(defaultSeries);
@@ -105,7 +108,10 @@ const Season: FC<SeasonProps> = ({
 
   return (
     <section
-      className="flex flex-col gap-4"
+      className={classNames(
+        "flex flex-col gap-4",
+        hidden && "hidden"
+      )}
       id={`season-${seasonId}`}
       ref={handleAutoScroll}
     >

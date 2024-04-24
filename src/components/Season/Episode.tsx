@@ -7,6 +7,7 @@ import { GoHeart, GoHeartFill } from "react-icons/go";
 
 import Poster from "../Poster";
 import classNames from "classnames";
+import structuredClone from '@ungap/structured-clone';
 
 export interface EpisodeProps extends EpisodeInfo { }
 
